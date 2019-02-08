@@ -5,6 +5,8 @@
  */
 package pizzahut;
 
+import java.awt.Dimension;
+
 /**
  *
  * @author p1700594
@@ -16,6 +18,7 @@ public class PizzaHut {
      */
     public static void main(String[] args) {
         Fenetre f=new Fenetre();
+        f.setPreferredSize(new Dimension(500, 500));
         f.setVisible(true);
     }
     

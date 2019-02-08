@@ -9,7 +9,9 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Vector;
+import javax.swing.ComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -21,10 +23,10 @@ import javax.swing.JPanel;
  * @author p1700594
  */
 public class SupPizza extends JDialog implements ActionListener{
-    private JComboBox com;
+    private JComboBox<Integer> com;
     private JLabel pizza;
     private JButton val, annul;
-    private Vector<Integer> vect;
+    private Integer[] vect;
     private int idPizza=0;
     JPanel pan;
     GridBagConstraints cont;
@@ -35,8 +37,10 @@ public class SupPizza extends JDialog implements ActionListener{
         
         
         this.setTitle("Ajouter une Pizza");
-        
+        vect=new Integer[fen.getNbPizza()];
         init(fen);
+        
+        
         
         annul.addActionListener(this);
         val.addActionListener(this);
@@ -53,9 +57,12 @@ public class SupPizza extends JDialog implements ActionListener{
         val=new JButton("Supprimer");
         annul=new JButton("Annuler");
         for(int i=0;i<fen.getNbPizza();i++){
-            vect.add(i);
+            vect[i]=(Integer) i+1;
         }
-        com=new JComboBox(vect);
+        
+       
+        
+        com=new JComboBox<>(vect);
         
         cont.gridx=0;
         cont.gridy=0;
@@ -66,12 +73,15 @@ public class SupPizza extends JDialog implements ActionListener{
         pan.add(com,cont);
         
         cont.gridx=1;
-        cont.gridy=0;
+        cont.gridy=1;
         pan.add(annul,cont);
         
         cont.gridx=1;
-        cont.gridy=1;
+        cont.gridy=2;
         pan.add(val,cont);
+        
+        this.setContentPane(pan);
+        this.pack();
     }
 
     @Override

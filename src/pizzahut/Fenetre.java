@@ -28,7 +28,7 @@ import javax.swing.border.BevelBorder;
  * @author p1700594
  */
 public class Fenetre extends JFrame implements ActionListener{
-    private ArrayList<String> listePizza;
+    private ArrayList<Pizza> listePizza;
     private ArrayList<JLabel> listeLabel;
     private ArrayList<JComboBox> com; 
     private ArrayList<JLabel> idPizza;
@@ -41,6 +41,8 @@ public class Fenetre extends JFrame implements ActionListener{
     private JMenuBar menuBar;
     private JMenu menu;
     private JMenuItem aj, sup, mod;
+    
+    private int idPizzaModifiee;
     
     JPanel pan;
     GridBagConstraints cont;
@@ -74,7 +76,7 @@ public class Fenetre extends JFrame implements ActionListener{
         raz.setBackground(Color.red);
         calc= new JButton("Calculer");
         calc.setBackground(Color.green);
-        prix=new JLabel("0€");
+        prix=new JLabel("0.0 $");
         
         menuBar=new JMenuBar();
         menu=new JMenu("Pizza");
@@ -104,9 +106,9 @@ public class Fenetre extends JFrame implements ActionListener{
         AjPizza ajp=new AjPizza(this);
         Pizza p=ajp.showDialog();
         
-        listePizza.add(p.getNom()+" "+p.getIngredients()+" "+p.getTarif());
+        listePizza.add(p);
         listeLabel.add(new JLabel(p.getNom()+" "+p.getIngredients()+" "+p.getTarif()));
-        
+        idPizza.add(new JLabel(listePizza.size()+": "));
         com.add(new JComboBox(vect));
         placement();
     }
@@ -118,25 +120,55 @@ public class Fenetre extends JFrame implements ActionListener{
         listeLabel.remove(id-1);
         com.remove(id-1);
         idPizza.clear();
+        for(int i=0; i<listePizza.size();i++){
+            idPizza.add(new JLabel(i+1+": "));
+        }
         placement();
     }
     
     public void modification(){
+        SelectModPizza selmod=new SelectModPizza(this);
+        Pizza pizza=selmod.showDialog();
+        
+        listePizza.get(idPizzaModifiee).setNom(pizza.getNom());
+        listePizza.get(idPizzaModifiee).setTarif(pizza.getTarif());
+        listePizza.get(idPizzaModifiee).setIngredients(pizza.getIngredients());
+        
+        listeLabel.get(idPizzaModifiee).setText(pizza.getNom()+" "+pizza.getIngredients()+" "+pizza.getTarif());
         
     }
     
     public void remiseAZero(){
-        
+        for(int i=0; i<com.size();i++){
+            com.get(i).setSelectedIndex(0);
+        }
+        prix.setText("0.0 $");
+        prix.repaint();
     }
     
     public void calcul(){
-        
+        float total=0;
+        for(int i=0;i<com.size();i++){
+            total+=Integer.parseInt(com.get(i).getSelectedItem().toString())*listePizza.get(i).getTarif();
+        }
+        prix.setText(String.valueOf(total)+" $");
+        prix.repaint();
     }
     
     public int getNbPizza(){
         return listePizza.size();
     }
+    
+    public ArrayList<Pizza> getListePizza(){
+        return listePizza;
+    }
+    
+    public void setIdPizzaModifiee(int i){
+        idPizzaModifiee=i;
+    }
+    
     public void placement(){
+        pan.removeAll();
         pan.setLayout(new GridBagLayout());
         cont.fill=GridBagConstraints.BOTH;
         
@@ -147,7 +179,6 @@ public class Fenetre extends JFrame implements ActionListener{
         
         
         for(int i=0; i<listePizza.size();i++){
-            idPizza.add(new JLabel(i+1+":"));
             cont.gridx=0;
             cont.gridy=i;
             pan.add(idPizza.get(i),cont);
@@ -161,15 +192,15 @@ public class Fenetre extends JFrame implements ActionListener{
         }
         
         cont.gridx=2;
-        cont.gridy=0;
+        cont.gridy=listePizza.size();
         pan.add(raz,cont);
         
         cont.gridx=2;
-        cont.gridy=1;
+        cont.gridy=listePizza.size()+1;
         pan.add(calc,cont);
         
         cont.gridx=2;
-        cont.gridy=2;
+        cont.gridy=listePizza.size()+2;
         pan.add(prix,cont);
         
         
