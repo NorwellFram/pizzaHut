@@ -32,6 +32,7 @@ public class Fenetre extends JFrame implements ActionListener{
     private ArrayList<JLabel> listeLabel;
     private ArrayList<JComboBox> com; 
     private ArrayList<JLabel> idPizza;
+    private ArrayList<Ingredient> listeIngredient;
     private Vector vect;
     private JLabel prix;
     
@@ -132,7 +133,7 @@ public class Fenetre extends JFrame implements ActionListener{
         
         listePizza.get(idPizzaModifiee).setNom(pizza.getNom());
         listePizza.get(idPizzaModifiee).setTarif(pizza.getTarif());
-        listePizza.get(idPizzaModifiee).setIngredients(pizza.getIngredients());
+        listePizza.get(idPizzaModifiee).setIngredients(pizza.getIngredients().toString());
         
         listeLabel.get(idPizzaModifiee).setText(pizza.getNom()+" "+pizza.getIngredients()+" "+pizza.getTarif());
         
@@ -166,6 +167,16 @@ public class Fenetre extends JFrame implements ActionListener{
     public void setIdPizzaModifiee(int i){
         idPizzaModifiee=i;
     }
+
+    public ArrayList<Ingredient> getListeIngredient() {
+        return listeIngredient;
+    }
+
+    public void setListeIngredient(ArrayList<Ingredient> listeIngredient) {
+        this.listeIngredient = listeIngredient;
+    }
+    
+    
     
     public void placement(){
         pan.removeAll();
