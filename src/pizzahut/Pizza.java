@@ -5,13 +5,15 @@
  */
 package pizzahut;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author p1700594
  */
 public class Pizza {
     private String nom;
-    private String ingredients;
+    private ArrayList<Ingredient> ingredients;
     private float tarif;
 
     public Pizza() {
@@ -19,7 +21,7 @@ public class Pizza {
 
     public Pizza(String nom, String ingredients, float tarif) {
         this.nom = nom;
-        this.ingredients = ingredients;
+        this.ingredients = null;
         this.tarif = tarif;
     }
     
@@ -28,7 +30,7 @@ public class Pizza {
         return nom;
     }
 
-    public String getIngredients() {
+    public ArrayList getIngredients() {
         return ingredients;
     }
 
@@ -40,8 +42,12 @@ public class Pizza {
         this.nom = nom;
     }
 
-    public void setIngredients(String ingredients) {
-        this.ingredients = ingredients;
+    public void setIngredients(String ingredient) {
+        this.ingredients.add(new Ingredient(ingredient));
+    }
+    
+    public void removeIngredient(int idIngredient){
+        this.ingredients.remove(idIngredient);
     }
 
     public void setTarif(float tarif) {
