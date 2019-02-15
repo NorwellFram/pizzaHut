@@ -6,32 +6,23 @@
 package pizzahut;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.NumberFormat;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.JFormattedTextField;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerNumberModel;
-import javax.swing.text.DefaultFormatterFactory;
-import javax.swing.text.NumberFormatter;
-import sun.text.resources.fr.FormatData_fr;
 /**
  *
  * @author p1700594
  */
 public class AjPizza extends JDialog implements ActionListener{
     private JLabel nom, prix, ingredient;
-    private JTextField inNom,inIngredient;
-    private JSpinner inPrix;
+    private JTextField inNom,inPrix,inIngredient;
     private JButton annul, val;
     private Pizza pizza=null;
     JPanel pan;
@@ -64,10 +55,8 @@ public class AjPizza extends JDialog implements ActionListener{
         ingredient=new JLabel("Ingredients");
         inNom=new JTextField("Nouvelle Pizza");
         inNom.setColumns(10);
-        
-        inPrix=new JSpinner(new SpinnerNumberModel());
-        inPrix.setMinimumSize(new Dimension(50, 25));
-        
+        inPrix=new JTextField("0");
+        inPrix.setColumns(10);
         inIngredient=new JTextField("ingredients");
         inIngredient.setColumns(10);
         annul=new JButton("Annuler");
@@ -114,7 +103,7 @@ public class AjPizza extends JDialog implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource()==val){
-            pizza=new Pizza(inNom.getText(),inIngredient.getText(),Float.parseFloat(inPrix.getValue().toString())); //nouvelle pizza
+            pizza=new Pizza(inNom.getText(),inIngredient.getText(),Float.parseFloat(inPrix.getText())); //nouvelle pizza
             this.setVisible(false);
         }
         if(e.getSource()==annul){
