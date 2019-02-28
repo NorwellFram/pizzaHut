@@ -88,7 +88,10 @@ public class SupPizza extends JDialog implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==val){
             this.setVisible(false);
-            idPizza=(int) com.getSelectedItem();
+            if(com.getSelectedIndex()>=0){
+                idPizza=(int) com.getSelectedItem();
+            }
+            
         }
         if(e.getSource()==annul){
             this.setVisible(false);

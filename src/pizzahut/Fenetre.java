@@ -116,7 +116,7 @@ public class Fenetre extends JFrame implements ActionListener{
         
         if(p!=null){
             listePizza.add(p);
-            listeLabel.add(new JLabel(p.getNom()+" "+p.getIngredients()+" "+p.getTarif()));
+            listeLabel.add(new JLabel(p.getNom()+" "+p.getIngredients()[0].getNom()+" "+p.getTarif()));
             idPizza.add(new JLabel(listePizza.size()+": "));
             com.add(new JComboBox(vect));
         }
@@ -126,14 +126,18 @@ public class Fenetre extends JFrame implements ActionListener{
     
     public void suppression(){
         SupPizza supp=new SupPizza(this);
-        int id=supp.showDialog();
-        listePizza.remove(id-1);
-        listeLabel.remove(id-1);
-        com.remove(id-1);
-        idPizza.clear();
-        for(int i=0; i<listePizza.size();i++){
-            idPizza.add(new JLabel(i+1+": "));
+        int id=-1;
+        id=supp.showDialog();
+        if(id>0){
+            listePizza.remove(id-1);
+            listeLabel.remove(id-1);
+            com.remove(id-1);
+            idPizza.clear();
+            for(int i=0; i<listePizza.size();i++){
+               idPizza.add(new JLabel(i+1+": "));
+            }
         }
+        
         placement();
     }
     
@@ -143,7 +147,7 @@ public class Fenetre extends JFrame implements ActionListener{
         
         listePizza.get(idPizzaModifiee).setNom(pizza.getNom());
         listePizza.get(idPizzaModifiee).setTarif(pizza.getTarif());
-        listePizza.get(idPizzaModifiee).setIngredients(pizza.getIngredients().toString());
+        listePizza.get(idPizzaModifiee).addIngredients(pizza.getIngredients()[0].getNom());
         
         listeLabel.get(idPizzaModifiee).setText(pizza.getNom()+" "+pizza.getIngredients()+" "+pizza.getTarif());
         

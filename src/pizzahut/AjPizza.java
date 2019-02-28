@@ -8,6 +8,7 @@ package pizzahut;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -18,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.plaf.metal.MetalBorders;
 /**
  *
  * @author p1700594
@@ -63,6 +65,7 @@ public class AjPizza extends JDialog implements ActionListener{
         inNom=new JTextField("Nouvelle Pizza");
         inNom.setColumns(10);
         inPrix=new JSpinner();
+        ((JSpinner.DefaultEditor) inPrix.getEditor()).getTextField().setColumns(10);
         comboIngredient=new String[fen.getListeIngredient().size()];
         for(int i=0;i<fen.getListeIngredient().size();i++){
             comboIngredient[i]=fen.getListeIngredient().get(i).getNom();
@@ -114,7 +117,7 @@ public class AjPizza extends JDialog implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource()==val){
-            pizza=new Pizza(inNom.getText(),inIngredient.getName(),(int) inPrix.getValue()); //nouvelle pizza
+            pizza=new Pizza(inNom.getText(), inIngredient.getSelectedItem().toString(),(int) inPrix.getValue()); //nouvelle pizza
             this.setVisible(false);
         }
         if(e.getSource()==annul){

@@ -13,16 +13,21 @@ import java.util.ArrayList;
  */
 public class Pizza {
     private String nom;
-    private ArrayList<Ingredient> ingredients;
+    private Ingredient[] ingredients;
+    private int nbIngredient;
     private float tarif;
 
     public Pizza() {
     }
 
-    public Pizza(String nom, String ingredients, float tarif) {
+    public Pizza(String nom, String ingredient, float tarif) {
         this.nom = nom;
-        this.ingredients = null;
+        nbIngredient=1;
+        this.ingredients = new Ingredient[nbIngredient];
         this.tarif = tarif;
+        
+        Ingredient i=new Ingredient(ingredient);
+        this.ingredients[0]=i;
     }
     
 
@@ -30,7 +35,7 @@ public class Pizza {
         return nom;
     }
 
-    public ArrayList getIngredients() {
+    public Ingredient[] getIngredients() {
         return ingredients;
     }
 
@@ -42,12 +47,25 @@ public class Pizza {
         this.nom = nom;
     }
 
-    public void setIngredients(String ingredient) {
-        this.ingredients.add(new Ingredient(ingredient));
+    public void addIngredients(String ingredient) {
+        nbIngredient++;
+        Ingredient[] temp=new Ingredient[nbIngredient];
+        for(int i=0;i<ingredients.length;i++){
+            temp[i]=ingredients[i];
+        }
+        temp[nbIngredient-1]=new Ingredient(ingredient);
+        ingredients=temp;
     }
     
     public void removeIngredient(int idIngredient){
-        this.ingredients.remove(idIngredient);
+        Ingredient[] temp=new Ingredient[nbIngredient-1];
+        for(int i=0;i<ingredients.length;i++){
+            if(i!=idIngredient){
+                temp[i]=ingredients[i];
+            }   
+        }
+        ingredients=temp;
+        nbIngredient--;
     }
 
     public void setTarif(float tarif) {
