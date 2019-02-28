@@ -144,13 +144,18 @@ public class Fenetre extends JFrame implements ActionListener{
     public void modification(){
         SelectModPizza selmod=new SelectModPizza(this);
         Pizza pizza=selmod.showDialog();
-        
+        /*
         listePizza.get(idPizzaModifiee).setNom(pizza.getNom());
         listePizza.get(idPizzaModifiee).setTarif(pizza.getTarif());
         listePizza.get(idPizzaModifiee).addIngredients(pizza.getIngredients()[0].getNom());
-        
-        listeLabel.get(idPizzaModifiee).setText(pizza.getNom()+" "+pizza.getIngredients()+" "+pizza.getTarif());
-        
+*/
+        String lab=pizza.getNom()+" ";
+        for(int i=0;i<pizza.getIngredients().length;i++){
+            lab+=pizza.getIngredients()[i].getNom()+" ";
+        }
+        lab+=" "+pizza.getTarif();
+        listeLabel.get(idPizzaModifiee).setText(lab);
+        placement();
     }
     
     public void remiseAZero(){
