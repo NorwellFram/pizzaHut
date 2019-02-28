@@ -62,9 +62,9 @@ public class AjPizza extends JDialog implements ActionListener{
         inNom.setColumns(10);
         inPrix=new JTextField("0");
         inPrix.setColumns(10);
-        
+        comboIngredient=new String[fen.getListeIngredient().size()];
         for(int i=0;i<fen.getListeIngredient().size();i++){
-            comboIngredient[i]=fen.getListeIngredient().get(i).toString();
+            comboIngredient[i]=fen.getListeIngredient().get(i).getNom();
         }
         
         inIngredient=new JComboBox(comboIngredient);

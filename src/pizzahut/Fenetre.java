@@ -70,6 +70,13 @@ public class Fenetre extends JFrame implements ActionListener{
         
         listePizza=new ArrayList();
         listeLabel=new ArrayList();
+        listeIngredient=new ArrayList<>();
+        
+        listeIngredient.add(new Ingredient("tomate"));
+        listeIngredient.add(new Ingredient("fromage"));
+        listeIngredient.add(new Ingredient("chorizo"));
+        listeIngredient.add(new Ingredient("champignons"));
+        
         com=new ArrayList();
         idPizza=new ArrayList();
         
