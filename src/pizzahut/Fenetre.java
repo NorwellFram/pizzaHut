@@ -114,10 +114,13 @@ public class Fenetre extends JFrame implements ActionListener{
         AjPizza ajp=new AjPizza(this);
         Pizza p=ajp.showDialog();
         
-        listePizza.add(p);
-        listeLabel.add(new JLabel(p.getNom()+" "+p.getIngredients()+" "+p.getTarif()));
-        idPizza.add(new JLabel(listePizza.size()+": "));
-        com.add(new JComboBox(vect));
+        if(p!=null){
+            listePizza.add(p);
+            listeLabel.add(new JLabel(p.getNom()+" "+p.getIngredients()+" "+p.getTarif()));
+            idPizza.add(new JLabel(listePizza.size()+": "));
+            com.add(new JComboBox(vect));
+        }
+        
         placement();
     }
     

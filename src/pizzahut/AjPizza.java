@@ -16,6 +16,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
 /**
  *
@@ -23,7 +24,8 @@ import javax.swing.JTextField;
  */
 public class AjPizza extends JDialog implements ActionListener{
     private JLabel nom, prix, ingredients;
-    private JTextField inNom,inPrix;
+    private JTextField inNom;
+    private JSpinner inPrix;
     private JButton annul, val, ajIng;
     private Pizza pizza=null;
     private JComboBox inIngredient;
@@ -60,8 +62,7 @@ public class AjPizza extends JDialog implements ActionListener{
         ingredients=new JLabel("Ingredients");
         inNom=new JTextField("Nouvelle Pizza");
         inNom.setColumns(10);
-        inPrix=new JTextField("0");
-        inPrix.setColumns(10);
+        inPrix=new JSpinner();
         comboIngredient=new String[fen.getListeIngredient().size()];
         for(int i=0;i<fen.getListeIngredient().size();i++){
             comboIngredient[i]=fen.getListeIngredient().get(i).getNom();
@@ -113,7 +114,7 @@ public class AjPizza extends JDialog implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource()==val){
-            pizza=new Pizza(inNom.getText(),inIngredient.getName(),Float.parseFloat(inPrix.getText())); //nouvelle pizza
+            pizza=new Pizza(inNom.getText(),inIngredient.getName(),(int) inPrix.getValue()); //nouvelle pizza
             this.setVisible(false);
         }
         if(e.getSource()==annul){
