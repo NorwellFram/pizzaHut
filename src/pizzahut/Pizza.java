@@ -59,10 +59,13 @@ public class Pizza {
     
     public void removeIngredient(int idIngredient){
         Ingredient[] temp=new Ingredient[nbIngredient-1];
+        int y=0;
         for(int i=0;i<ingredients.length;i++){
+            
             if(i!=idIngredient){
-                temp[i]=ingredients[i];
-            }   
+                temp[y]=ingredients[i];
+                y++;
+            }  
         }
         ingredients=temp;
         nbIngredient--;
