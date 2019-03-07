@@ -40,8 +40,8 @@ public class Fenetre extends JFrame implements ActionListener{
     private JButton calc;
 
     private JMenuBar menuBar;
-    private JMenu menu;
-    private JMenuItem aj, sup, mod;
+    private JMenu menuPizza, menuIngredient;
+    private JMenuItem ajP, supP, modP, ajI, supI, modI;
     
     private int idPizzaModifiee;
     
@@ -54,9 +54,12 @@ public class Fenetre extends JFrame implements ActionListener{
         
         init();
         
-        aj.addActionListener(this);
-        sup.addActionListener(this);
-        mod.addActionListener(this);
+        ajP.addActionListener(this);
+        supP.addActionListener(this);
+        modP.addActionListener(this);
+        ajI.addActionListener(this);
+        supI.addActionListener(this);
+        modI.addActionListener(this);
         raz.addActionListener(this);
         calc.addActionListener(this);
     }
@@ -87,14 +90,29 @@ public class Fenetre extends JFrame implements ActionListener{
         prix=new JLabel("0.0 $");
         
         menuBar=new JMenuBar();
-        menu=new JMenu("Pizza");
-        aj=new JMenuItem("Ajouter");
-        sup=new JMenuItem("Supprimer");
-        mod=new JMenuItem("Modifier");
-        menuBar.add(menu);
-        menu.add(aj);
-        menu.add(sup);
-        menu.add(mod);
+        
+        menuPizza=new JMenu("Pizza");
+        menuIngredient=new JMenu("Ingredient");
+        
+        ajP=new JMenuItem("Ajouter");
+        supP=new JMenuItem("Supprimer");
+        modP=new JMenuItem("Modifier");
+        
+        ajI=new JMenuItem("Ajouter");
+        supI=new JMenuItem("Supprimer");
+        modI=new JMenuItem("Modifier");
+        
+        
+        menuBar.add(menuPizza);
+        menuBar.add(menuIngredient);
+        
+        menuPizza.add(ajP);
+        menuPizza.add(supP);
+        menuPizza.add(modP);
+        
+        menuIngredient.add(ajI);
+        menuIngredient.add(supI);
+        menuIngredient.add(modI);
         
         
         
@@ -110,7 +128,7 @@ public class Fenetre extends JFrame implements ActionListener{
         
     }
     
-    public void ajout(){
+    public void ajoutPizza(){
         AjPizza ajp=new AjPizza(this);
         Pizza p=ajp.showDialog();
         
@@ -124,7 +142,7 @@ public class Fenetre extends JFrame implements ActionListener{
         placement();
     }
     
-    public void suppression(){
+    public void suppressionPizza(){
         SupPizza supp=new SupPizza(this);
         int id=-1;
         id=supp.showDialog();
@@ -141,7 +159,7 @@ public class Fenetre extends JFrame implements ActionListener{
         placement();
     }
     
-    public void modification(){
+    public void modificationPizza(){
         SelectModPizza selmod=new SelectModPizza(this);
         Pizza pizza=selmod.showDialog();
 
@@ -151,6 +169,43 @@ public class Fenetre extends JFrame implements ActionListener{
         }
         lab+=" "+pizza.getTarif();
         listeLabel.get(idPizzaModifiee).setText(lab);
+        placement();
+    }
+    
+    public void ajoutIngredient(){
+        AjIngredient aji=new AjIngredient(this);
+        Ingredient i=aji.showDialog();
+        
+        if(i!=null){
+            listeIngredient.add(i);
+        }
+        placement();
+    }
+    
+    public void suppressionIngredient(){
+        SupIngredient supp=new SupIngredient(this);
+        int id=-1;
+        id=supp.showDialog();
+        
+        if(id>0){
+            String ing=listeIngredient.get(id).getNom();
+            for(int i=0;i<listePizza.size();i++){
+                for(int j=0;j<listePizza.get(i).getIngredients().length;j++){
+                    if(listePizza.get(i).getIngredients()[j].getNom()==ing){
+                        listePizza.get(i).removeIngredient(j);
+                        String lab=listePizza.get(i).getNom()+" ";
+                        for(int k=0;k<listePizza.get(i).getIngredients().length;k++){
+                            lab+=listePizza.get(i).getIngredients()[i].getNom()+" ";
+                        }
+                        lab+=" "+listePizza.get(i).getTarif();
+                        listeLabel.get(i).setText(lab);
+                        
+                    }
+                }
+            }
+            listeIngredient.remove(id);
+        }
+        
         placement();
     }
     
@@ -237,14 +292,23 @@ public class Fenetre extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==aj){
-            ajout();
+        if(e.getSource()==ajP){
+            ajoutPizza();
         }
-        if(e.getSource()==sup){
-            suppression();
+        if(e.getSource()==supP){
+            suppressionPizza();
         }
-        if(e.getSource()==mod){
-            modification();
+        if(e.getSource()==modP){
+            modificationPizza();
+        }
+        if(e.getSource()==ajI){
+            ajoutIngredient();
+        }
+        if(e.getSource()==supI){
+            suppressionIngredient();
+        }
+        if(e.getSource()==modI){
+            modificationPizza();
         }
         if(e.getSource()==raz){
             remiseAZero();

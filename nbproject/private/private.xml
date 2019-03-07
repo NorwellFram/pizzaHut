@@ -3,13 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Eloi/Desktop/pizzaHut.git/trunk/src/pizzahut/ModPizza.java</file>
-            <file>file:/C:/Users/Eloi/Desktop/pizzaHut.git/trunk/src/pizzahut/Pizza.java</file>
-            <file>file:/C:/Users/Eloi/Desktop/pizzaHut.git/trunk/src/pizzahut/SupPizza.java</file>
-            <file>file:/C:/Users/Eloi/Desktop/pizzaHut.git/trunk/src/pizzahut/SelectModPizza.java</file>
             <file>file:/C:/Users/Eloi/Desktop/pizzaHut.git/trunk/src/pizzahut/AjPizza.java</file>
             <file>file:/C:/Users/Eloi/Desktop/pizzaHut.git/trunk/src/pizzahut/Ingredient.java</file>
             <file>file:/C:/Users/Eloi/Desktop/pizzaHut.git/trunk/src/pizzahut/Fenetre.java</file>
+            <file>file:/C:/Users/Eloi/Desktop/pizzaHut.git/trunk/src/pizzahut/SupIngredient.java</file>
         </group>
     </open-files>
 </project-private>

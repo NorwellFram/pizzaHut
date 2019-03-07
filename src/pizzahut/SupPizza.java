@@ -36,7 +36,7 @@ public class SupPizza extends JDialog implements ActionListener{
         super(fen,true);
         
         
-        this.setTitle("Ajouter une Pizza");
+        this.setTitle("Supprimer une Pizza");
         vect=new Integer[fen.getNbPizza()];
         init(fen);
         
@@ -53,7 +53,7 @@ public class SupPizza extends JDialog implements ActionListener{
         pan.setLayout(new GridBagLayout());
         cont.fill=GridBagConstraints.BOTH;
         
-        pizza=new JLabel("Pizza a supprimer");
+        pizza=new JLabel("Pizza à supprimer");
         val=new JButton("Supprimer");
         annul=new JButton("Annuler");
         for(int i=0;i<fen.getNbPizza();i++){
