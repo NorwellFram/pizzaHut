@@ -41,7 +41,7 @@ public class Fenetre extends JFrame implements ActionListener{
 
     private JMenuBar menuBar;
     private JMenu menuPizza, menuIngredient;
-    private JMenuItem ajP, supP, modP, ajI, supI, modI;
+    private JMenuItem ajP, supP, modP, ajI, supI;
     
     private int idPizzaModifiee;
     
@@ -59,7 +59,6 @@ public class Fenetre extends JFrame implements ActionListener{
         modP.addActionListener(this);
         ajI.addActionListener(this);
         supI.addActionListener(this);
-        modI.addActionListener(this);
         raz.addActionListener(this);
         calc.addActionListener(this);
     }
@@ -75,6 +74,7 @@ public class Fenetre extends JFrame implements ActionListener{
         listeLabel=new ArrayList();
         listeIngredient=new ArrayList<>();
         
+        listeIngredient.add(new Ingredient(""));
         listeIngredient.add(new Ingredient("tomate"));
         listeIngredient.add(new Ingredient("fromage"));
         listeIngredient.add(new Ingredient("chorizo"));
@@ -100,7 +100,6 @@ public class Fenetre extends JFrame implements ActionListener{
         
         ajI=new JMenuItem("Ajouter");
         supI=new JMenuItem("Supprimer");
-        modI=new JMenuItem("Modifier");
         
         
         menuBar.add(menuPizza);
@@ -112,7 +111,6 @@ public class Fenetre extends JFrame implements ActionListener{
         
         menuIngredient.add(ajI);
         menuIngredient.add(supI);
-        menuIngredient.add(modI);
         
         
         
@@ -187,7 +185,7 @@ public class Fenetre extends JFrame implements ActionListener{
         int id=-1;
         id=supp.showDialog();
         
-        if(id>0){
+        if(id>=0){
             String ing=listeIngredient.get(id).getNom();
             for(int i=0;i<listePizza.size();i++){
                 for(int j=0;j<listePizza.get(i).getIngredients().length;j++){
@@ -306,9 +304,6 @@ public class Fenetre extends JFrame implements ActionListener{
         }
         if(e.getSource()==supI){
             suppressionIngredient();
-        }
-        if(e.getSource()==modI){
-            modificationPizza();
         }
         if(e.getSource()==raz){
             remiseAZero();
